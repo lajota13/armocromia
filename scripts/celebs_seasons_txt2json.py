@@ -3,7 +3,7 @@ import re
 
 
 def clean_line(line: str) -> str:
-    m = re.match(r"[a-zÀ-ÿ]+\b", line, re.IGNORECASE)
+    m = re.match(r"[a-zÀ-ÿ ]+\b", line, re.IGNORECASE)
     assert m is not None, f"No match found for {line}"
     return m.group()
 
