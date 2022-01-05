@@ -1,6 +1,8 @@
 import json
 import os
+import argparse
 from datetime import datetime
+from typing import Tuple
 
 from tqdm import tqdm
 
@@ -10,7 +12,7 @@ from scripts.image_scraping import scrape_and_download_thumbnails
 TIME = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
 
 
-def build():
+def build(size: Tuple[int, int], samples: int):
     root = f"data/images/{TIME}"
     os.mkdir(root)
 
@@ -26,4 +28,10 @@ def build():
 
 
 if __name__ == "__main__":
-    build()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--size", help="Final size (width, height) of the images", type=int, nargs=2, required=True)
+    parser.add_argument("--samples", help="Number of samples per celebrity to download", type=int, default=50)
+
+    args = parser.parse_args()
+
+    build(args.size, args.samples)
