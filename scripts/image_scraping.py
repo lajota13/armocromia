@@ -90,5 +90,5 @@ def download_thumbnails(urls: List[str], dst_path_prefix: str, n: int = 100):
 
 def scrape_and_download_thumbnails(query: str, dst_dir: str, n: int = 100):
     urls = scrape_thumbnails(query)
-    dst_path_prefix = dst_dir + "/" + query.strip().replace("", "_")
+    dst_path_prefix = dst_dir + "/" + query.strip().replace(" ", "_")
     download_thumbnails(urls, dst_path_prefix, n)
