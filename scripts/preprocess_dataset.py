@@ -80,7 +80,7 @@ def preprocess_dataset(src_root: str):
     seasons_dirs = glob.glob(src_root + "/*/")
     for i, season_dir in enumerate(seasons_dirs, 1):
         os.mkdir(dst_root + "/" + season_dir.split("/")[-2])
-        print(f"{season_dir.split('/')[-1]} ({i}/{len(seasons_dirs)})")
+        print(f"{season_dir.split('/')[-2]} ({i}/{len(seasons_dirs)})")
         preprocess_season(season_dir, dst_root, logger)
 
 
