@@ -80,7 +80,12 @@ def download_thumbnail(url: str, img_name: str):
         img.resize(SIZE).save(img_name, "PNG")
 
 
-def download_thumbnails(urls: List[str], query: str):
-    for i, url in enumerate(urls):
-        q = query.replace(" ", "_")
-        download_thumbnail(url, f"{q}_{i}.png")
+def download_thumbnails(urls: List[str], dst_path_prefix: str, n: int = 100):
+    for i, url in enumerate(urls[:n]):
+        download_thumbnail(url, f"{dst_path_prefix}_{i}.png")
+
+
+def scrape_and_download_thumbnails(query: str, dst_dir: str, n: int = 100):
+    urls = scrape_thumbnails(query)
+    dst_path_prefix = dst_dir + "/" + query.strip().replace("", "_")
+    download_thumbnails(urls, dst_path_prefix, n)
