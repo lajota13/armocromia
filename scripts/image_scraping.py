@@ -76,8 +76,11 @@ def scrape_thumbnails(query: str) -> List[str]:
 
 def download_thumbnail(url: str, img_name: str):
     r = requests.get(url, headers=HEADERS)
-    with Image.open(BytesIO(r.content)) as img:
-        img.resize(SIZE).save(img_name, "PNG")
+    img = Image.open(BytesIO(r.content))
+    img_resized = img.resize(SIZE)
+    img_resized.save(img_name, "PNG")
+    img.close()
+    img_resized.close()
 
 
 def download_thumbnails(urls: List[str], dst_path_prefix: str, n: int = 100):
